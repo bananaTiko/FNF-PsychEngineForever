@@ -1,7 +1,7 @@
 # Friday Night Funkin' - Psych Engine Forever
-![Repo size](https://img.shields.io/github/repo-size/bananaTiko/FNF-PsychEngineForever?style=plastic?logo=github)
-![Last commit](https://img.shields.io/github/last-commit/bananaTiko/FNF-PsychEngineForever?style=plastic?logo=github)
-![License](https://img.shields.io/github/license/bananaTiko/FNF-PsychEngineForever?style=plastic?logo=github)
+![Repo size](https://img.shields.io/github/repo-size/bananaTiko/FNF-PsychEngineForever?style=plastic&logo=github)
+![Last commit](https://img.shields.io/github/last-commit/bananaTiko/FNF-PsychEngineForever?style=plastic&logo=github)
+![License](https://img.shields.io/github/license/bananaTiko/FNF-PsychEngineForever?style=plastic&logo=github)
 
 A Shitty Fork Of A engine Built off the Engine that was originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
