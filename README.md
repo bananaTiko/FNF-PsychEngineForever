@@ -27,6 +27,7 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 
 ## Special Thanks
 * Psych Engine Devs!
+* [shields.io](https://shields.io/)
 _____________________________________
 
 # Features
