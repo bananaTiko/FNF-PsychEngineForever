@@ -29,8 +29,4 @@ _____________________________________
 
 ## Everything from Psych Engine
 
-* DUH
-
-# Results Screen!
-
-* Shows your Total Rating at the end of a song! (or week if you're playing in story mode!)
+DUH
