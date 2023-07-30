@@ -13,6 +13,9 @@ import states.editors.ChartingState;
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -58,7 +61,7 @@ class FreeplayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the Freeplay Menus", null);
 		#end
 
 		for (i in 0...WeekData.weeksList.length) {
@@ -303,6 +306,9 @@ class FreeplayState extends MusicBeatState
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
+			FlxTween.tween(FlxG.camera, {zoom: 0.6, alpha: -0.6}, 0.7, {ease: FlxEase.quartInOut});
+			FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
+			FlxTween.tween(scoreText, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
 		}
 
 		if(FlxG.keys.justPressed.CONTROL)
@@ -449,6 +455,7 @@ class FreeplayState extends MusicBeatState
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
 				colorTween.cancel();
+				colorTween2.cancel();
 			}
 			intendedColor = newColor;
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {

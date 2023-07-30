@@ -7,6 +7,9 @@ import sys.io.File;
 
 import objects.AttachedSprite;
 
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+
 class CreditsState extends MusicBeatState
 {
 	var curSelected:Int = -1;
@@ -44,15 +47,20 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['Psych Engine Forever Team'],
+			['Tiko',				'tiko',				"'Hard+' Difficulty Charter and Overall Helper",	'https://twitter.com/Banana_tiko_2',					'ffc127'],
+			[''],
+			['Psych Engine Forever Contributors'],
+			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
 			['Riveren',				'riveren',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/riverennn',		'B42F71'],
 			[''],
-			['Former Engine Members'],
+			['Former Psych Engine Members'],
 			['shubs',				'shubs',			'Ex-Programmer of Psych Engine',								'https://twitter.com/yoshubs',			'5E99DF'],
 			['bb-panzu',			'bb',				'Ex-Programmer of Psych Engine',								'https://twitter.com/bbsub3',			'3E813A'],
 			[''],
-			['Engine Contributors'],
+			['Psych Engine Contributors'],
 			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		'https://twitter.com/flicky_i',			'9E29CF'],
 			['SqirraRNG',			'sqirra',			'Crash Handler and Base code for\nChart Editor\'s Waveform',	'https://twitter.com/gedehari',			'E1843A'],
 			['EliteMasterEric',		'mastereric',		'Runtime Shaders support',										'https://twitter.com/EliteMasterEric',	'FFBD40'],
@@ -178,6 +186,10 @@ class CreditsState extends MusicBeatState
 					colorTween.cancel();
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
+
+				FlxTween.tween(FlxG.camera, { zoom: 2}, 0.4, { ease: FlxEase.expoIn});
+				FlxTween.tween(bg, { y: 0-bg.height}, 0.4, { ease: FlxEase.expoIn });
+
 				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
 			}

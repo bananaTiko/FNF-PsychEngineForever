@@ -14,9 +14,13 @@ import objects.AchievementPopup;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.7.1'; //This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.7.1h'; //This is also used for Discord RPC
+	public static var psychEngineforeverVersion:String = '0.1'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -45,7 +49,7 @@ class MainMenuState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the Main Menu", null);
 		#end
 
 		camGame = new FlxCamera();
@@ -116,6 +120,14 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0);
 
+		FlxG.camera.zoom = 3;
+		FlxTween.tween(FlxG.camera, {zoom: 1}, 1.1, {ease: FlxEase.expoInOut});
+		FlxTween.tween(bg, {angle: 0}, 1, {ease: FlxEase.quartInOut});
+
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine forever v" + psychEngineforeverVersion, 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -124,6 +136,23 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
+		if (Date.now().getMonth() == 10 && Date.now().getDate() == 31)
+			versionShit.color = FlxColor.ORANGE;
+		else if (Date.now().getMonth() == 12 && Date.now().getDate() == 25)
+			versionShit.color = FlxColor.CYAN;
+		add(versionShit);
+		var halloween:FlxText = new FlxText(0, 18, "Happy Halloween " + Date.now().getFullYear() + "!", 16);
+		halloween.scrollFactor.set();
+		halloween.setFormat("VCR OSD Mono", 16, FlxColor.ORANGE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		halloween.screenCenter(X);
+		var holidays:FlxText = new FlxText(0, 18, "Happy Holidays " + Date.now().getFullYear() + "!", 16);
+		holidays.scrollFactor.set();
+		holidays.setFormat("VCR OSD Mono", 16, FlxColor.CYAN, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		holidays.screenCenter(X);
+		if (Date.now().getMonth() == 10 && Date.now().getDate() == 31)
+			add(halloween);
+		else if (Date.now().getMonth() == 12 && Date.now().getDate() == 25)
+			add(holidays);
 
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -203,6 +232,9 @@ class MainMenuState extends MusicBeatState
 					{
 						if (curSelected != spr.ID)
 						{
+							FlxTween.tween(FlxG.camera, {zoom: 5}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(bg, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
+
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
 								ease: FlxEase.quadOut,
 								onComplete: function(twn:FlxTween)

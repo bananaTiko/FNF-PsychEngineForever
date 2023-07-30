@@ -52,6 +52,7 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var psychSpr:FlxSprite;
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
@@ -89,6 +90,10 @@ class TitleState extends MusicBeatState
 		FlxG.keys.preventDefaultKeys = [TAB];
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
+		if (Date.now().getMonth() == 10 && Date.now().getDate() == 31)
+			curWacky = ["Happy", "Halloween"];
+		else if (Date.now().getMonth() == 12 && Date.now().getDate() == 25)
+			curWacky = ["Happy", "Holidays"];
 
 		super.create();
 
@@ -99,12 +104,12 @@ class TitleState extends MusicBeatState
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.data.checkForUpdates && !closedState) {
 			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
+			var http = new haxe.Http("https://raw.githubusercontent.com/bananaTiko/FNF-PsychEngineForever/main/gitVersion.txt");
 
 			http.onData = function (data:String)
 			{
 				updateVersion = data.split('\n')[0].trim();
-				var curVersion:String = MainMenuState.psychEngineVersion.trim();
+				var curVersion:String = MainMenuState.psychEngineForeverVersion.trim();
 				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
 				if(updateVersion != curVersion) {
 					trace('versions arent matching!');
@@ -326,6 +331,14 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.data.antialiasing;
+
+		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('Psych_logo'));
+		add(psychSpr);
+		psychSpr.visible = false;
+		psychSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
+		psychSpr.updateHitbox();
+		psychSpr.screenCenter(X);
+		psychSpr.antialiasing = ClientPrefs.data.antialiasing;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -561,46 +574,54 @@ class TitleState extends MusicBeatState
 				case 1:
 					//FlxG.sound.music.stop();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-					FlxG.sound.music.fadeIn(4, 0, 0.7);
+					FlxG.sound.music.fadeIn(4, 0, 0.7);\ 
 				case 2:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 40);
+					createCoolText(['Psych Engine Forever by'], 40);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
-				case 4:
+				case 3:
 					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					addMoreText('Banana Tiko', 40);
 					#else
 					addMoreText('present');
 					#end
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
-				case 5:
+				case 4:
 					deleteCoolText();
+				case 5:
+					createCoolText(['Forked', 'From'], -40);
+				case 6:
+					addMoreText('Psych Engine v' + MainMenuState.psychEngineVersion, -40);
+					psychSpr.visible = true;
+				// credTextShit.text += '\npresent...';
+				// credTextShit.addText();
+				case 7:
+					deleteCoolText();
+					psychSpr.visible = false;
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
-				case 6:
+				case 8:
 					#if PSYCH_WATERMARKS
 					createCoolText(['Not associated', 'with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
-				case 8:
+				case 9:
 					addMoreText('newgrounds', -40);
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
-				case 9:
+				case 10:
 					deleteCoolText();
 					ngSpr.visible = false;
 				// credTextShit.visible = false;
-
 				// credTextShit.text = 'Shoutouts Tom Fulp';
 				// credTextShit.screenCenter();
-				case 10:
+				case 11:
 					createCoolText([curWacky[0]]);
 				// credTextShit.visible = true;
 				case 12:
@@ -619,8 +640,13 @@ class TitleState extends MusicBeatState
 				// credTextShit.text += '\nNight';
 				case 16:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
 				case 17:
+					addMoreText('Psych'); // credTextShit.text += '\nPsych';
+				case 18:
+					addMoreText('Engine'); // credTextShit.text += '\nEngine';
+				case 18:
+					addMoreText('Forever'); // credTextShit.text += '\nForever';
+				case 20:
 					skipIntro();
 			}
 		}
@@ -632,7 +658,7 @@ class TitleState extends MusicBeatState
 	{
 		if (!skippedIntro)
 		{
-			if (playJingle) //Ignore deez
+			if (playJingle) //Ignore deez 
 			{
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
 				if (easteregg == null) easteregg = '';

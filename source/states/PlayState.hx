@@ -3375,7 +3375,8 @@ class PlayState extends MusicBeatState
 		ratingFC = 'Clear';
 		if(songMisses < 1)
 		{
-			if (bads > 0 || shits > 0) ratingFC = 'FC';
+			if (songMisses > 0 bads > 0 || shits > 0 || goods > 0) ranking = 'MFC';  // Full Combo 
+			else if (bads > 0 || shits > 0) ratingFC = 'FC';
 			else if (goods > 0) ratingFC = 'GFC';
 			else if (sicks > 0) ratingFC = 'SFC';
 		}
