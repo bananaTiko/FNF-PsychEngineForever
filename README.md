@@ -2,6 +2,7 @@
 ![Repo size](https://img.shields.io/github/repo-size/bananaTiko/FNF-PsychEngineForever?logo=github)
 ![Last commit](https://img.shields.io/github/last-commit/bananaTiko/FNF-PsychEngineForever?logo=github)
 ![License](https://img.shields.io/github/license/bananaTiko/FNF-PsychEngineForever?logo=github)
+if you found this randomlly check out [Psych Engine Forever 2.0](https://github.com/bananaTiko/FNF-PsychEngineForever2.0) it a newer version of this will be broken
 
 A Shitty Fork Of the engine that was originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
