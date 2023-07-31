@@ -66,7 +66,7 @@ class LoadingScreenState extends FlxState {
 		bg.scale.y = 0;
 		add(bg);
 
-		psychEngineLogo = new FlxSprite().loadGraphic(Paths.image("PsychEngineLogo"));
+		psychEngineLogo = new FlxSprite().loadGraphic(Paths.image("Psych_Logo"));
 		psychEngineLogo.screenCenter();
 		psychEngineLogo.y -= 60;
 		psychEngineLogo.antialiasing = ClientPrefs.globalAntialiasing;
